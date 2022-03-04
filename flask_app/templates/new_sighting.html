@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sasquatch Websighting</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="p-5 mb-2 bg-secondary text-white">
+    <nav class="d-flex justify-content-between align-items-center col-12">
+        <h1 class="text-center">Sasquatch Websighting</h1>
+        <div>
+        <h1 class="text-center my-3">{{user.first_name}} {{user.last_name}}</h1>
+        <div class="col-xs-3">
+            <a href="/new/sighting" class="btn btn-primary">Report a Sighting</a>
+            <a href="/logout" class="btn btn-info">Logout</a>
+        </div>
+        </div>
+    </nav>
+    <form action="/report/sighting" method="post" class="col-11 p-4 my-4 bg-dark text-light mx-auto">
+        <h2 class="text-primary">Report a Sighting</h2>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Error Found</strong>
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+        
+        <div class="d-flex justify-content-between col-9">
+            <div class="col-4">
+                <div class="form-group">
+                    <input type="hidden" name="reporter" value=" {{user.first_name}} {{user.last_name}}" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="location">Location:</label>
+                    <input type="text" name="location" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="what_happened">What Happened:</label>
+                    <textarea name="what_happened"  cols="30" rows="5" class="form-control"></textarea>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="form-group">
+                    <label for="date_of_sighting">Date of Sighting:</label>
+                    <input type="date" name="date_of_sighting" class="form-control">
+                </div>
+                <label for="num_of_sasquatches">Number of Sasquatches:</label>
+                <input id="num_of_sasquatches" type="number" name="num_of_sasquatches" value="0">
+                </div>
+
+                <div>
+                <input type="submit" value="Report" class="btn btn-primary">
+                </div>
+            </div>
+            <div class="col-3">
+                <a href="/dashboard" class="btn btn-info">Back</a>
+            </div>
+        </div>
+    </form>
+    </div>
+</body>
+</html>
